@@ -6,7 +6,7 @@ document.querySelector("#app").innerHTML = `
     <h1>KardChips</h1>
     <p>Play Bold. Win Big. Infinite Reach.</p>
     <div class="actions">
-      <button class="neon-btn">Create Account</button>
+      <button class="neon-btn">Sign In</button>
       <button class="neon-outline-btn">Explore Games</button>
     </div>
   </div>
@@ -29,7 +29,9 @@ for (let i = 0; i < 250; i++) {
 function drawStars() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#00f0ff";
+  ctx.shadowColor = "#00f0ff";
+  ctx.shadowBlur = 8;
   for (let star of stars) {
     let k = 128.0 / star.z;
     let x = star.x * k + canvas.width / 2;

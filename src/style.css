@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@300&display=swap");
+
 body,
 html {
   margin: 0;
@@ -30,14 +32,40 @@ html {
 
 .hero h1 {
   font-size: 4rem;
-  color: #00f0ff;
-  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 300;
+
+  background: linear-gradient(90deg, #00f0ff, #ffffff, #00f0ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 0.2em;
+
+  text-shadow: 0 0 1px #000, 0 0 3px #0ff, 0 0 6px #0ff, 0 0 12px #00f0ff,
+    0 0 24px #00e0ff, 0 0 36px #00c0ff, 0 0 48px #00a0ff, 0 0 60px #0080ff,
+    0 0 80px #0050ff, 0 0 100px #0020ff;
 }
 
 .hero p {
-  font-size: 1.5rem;
-  color: #ccc;
-  margin-top: 1rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 300;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+
+  background: linear-gradient(90deg, #00f0ff, #ffffff, #00f0ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 0 1px #000, 0 0 3px #0ff, 0 0 6px #00f0ff, 0 0 12px #00e0ff,
+    0 0 20px #00c0ff, 0 0 30px #00a0ff, 0 0 40px #0080ff;
+
+  animation: flicker 4.5s infinite;
 }
 
 .actions {
@@ -77,4 +105,38 @@ html {
 .neon-outline-btn:hover {
   background: #00f0ff;
   color: #000;
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 1px #000, 0 0 3px #0ff, 0 0 6px #00f0ff, 0 0 12px #00e0ff,
+      0 0 20px #00c0ff, 0 0 30px #00a0ff, 0 0 40px #0080ff;
+  }
+
+  20%,
+  22%,
+  24%,
+  55% {
+    opacity: 0.5;
+    text-shadow: 0 0 1px #000, 0 0 1px #0ff;
+  }
+
+  70% {
+    opacity: 0.8;
+    text-shadow: 0 0 2px #00c0ff, 0 0 4px #0080ff;
+  }
+
+  80%,
+  90% {
+    opacity: 0.6;
+    text-shadow: 0 0 1px #000;
+  }
 }
