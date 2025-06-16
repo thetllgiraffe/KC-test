@@ -1,24 +1,22 @@
 import "../style.css";
-import { citySkyline } from "./citySkyline.js";
+import { CitySkyline } from "./CitySkyline.js";
 
 export function renderLanding() {
   document.querySelector("#app").innerHTML = `
-  <canvas id="starfield"></canvas>  
-  <canvas id="skyline"></canvas>
-  
-  <div class="hero">
-    <h1>KardChips</h1>
-    <p>Play Bold. Win Big. Infinite Reach.</p>
-    <div class="actions">
-      <button class="neon-btn">Sign In</button>
-      <button class="neon-outline-btn">Explore Games</button>
+    <canvas id="starfield"></canvas>  
+    <canvas id="skyline"></canvas>
+    <div class="hero">
+      <h1>KardChips</h1>
+      <p>Play Bold. Win Big. Infinite Reach.</p>
+      <div class="actions">
+        <button class="neon-btn" id="signin-btn">Sign In</button>
+        <button class="neon-outline-btn">Explore Games</button>
+      </div>
     </div>
-  </div>
-`;
+  `;
 
   const canvas = document.getElementById("starfield");
   const ctx = canvas.getContext("2d");
-
   const skylineCanvas = document.getElementById("skyline");
 
   function resizeCanvas() {
@@ -36,7 +34,7 @@ export function renderLanding() {
     skylineCanvas.style.height = `${height}px`;
 
     createStars();
-    citySkyline(skylineCanvas);
+    CitySkyline(skylineCanvas);
   }
 
   let stars = [];
@@ -103,10 +101,17 @@ export function renderLanding() {
     requestAnimationFrame(animate);
   }
 
-  window.addEventListener("resize", () => {
-    resizeCanvas();
-  });
+  window.addEventListener("resize", resizeCanvas);
 
   resizeCanvas();
   animate();
+
+  setTimeout(() => {
+    const btn = document.getElementById("signin-btn");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        window.location.hash = "#login";
+      });
+    }
+  }, 0);
 }
