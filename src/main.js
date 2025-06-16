@@ -2,8 +2,9 @@ import "./style.css";
 import { citySkyline } from "./components/citySkyline.js";
 
 document.querySelector("#app").innerHTML = `
+  <canvas id="starfield"></canvas>  
   <canvas id="skyline"></canvas>
-  <canvas id="starfield"></canvas>
+  
   <div class="hero">
     <h1>KardChips</h1>
     <p>Play Bold. Win Big. Infinite Reach.</p>
@@ -14,45 +15,70 @@ document.querySelector("#app").innerHTML = `
   </div>
 `;
 
-const skylineCanvas = document.getElementById("skyline");
-skylineCanvas.width = window.innerWidth;
-skylineCanvas.height = window.innerHeight;
-citySkyline(skylineCanvas);
-
 const canvas = document.getElementById("starfield");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+const skylineCanvas = document.getElementById("skyline");
+
+function resizeCanvas() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  canvas.width = width;
+  canvas.height = height;
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+
+  skylineCanvas.width = width;
+  skylineCanvas.height = height;
+  skylineCanvas.style.width = `${width}px`;
+  skylineCanvas.style.height = `${height}px`;
+
+  createStars();
+  citySkyline(skylineCanvas);
+}
 
 let stars = [];
-for (let i = 0; i < 250; i++) {
-  stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    z: Math.random() * canvas.width,
-  });
+
+function createStars() {
+  const width = canvas.width;
+  const height = canvas.height;
+  stars = [];
+
+  for (let i = 0; i < 250; i++) {
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      z: Math.random() * width,
+    });
+  }
 }
 
 function drawStars() {
-  const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  bgGradient.addColorStop(0, "rgba(0, 240, 255, 0.05)");
-  bgGradient.addColorStop(0.45, "rgba(0, 0, 0, 1)");
-  bgGradient.addColorStop(0.55, "rgba(0, 0, 0, 1)");
-  bgGradient.addColorStop(1, "rgba(0, 240, 255, 0.03)");
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+  bgGradient.addColorStop(0, "rgba(0, 240, 255, 0.06)");
+  bgGradient.addColorStop(0.48, "rgba(0, 0, 0, 1)");
+  bgGradient.addColorStop(0.52, "rgba(0, 0, 0, 1)");
+  bgGradient.addColorStop(1, "rgba(0, 240, 255, 0.04)");
 
   ctx.fillStyle = bgGradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, width, height);
 
   ctx.fillStyle = "#00f0ff";
   ctx.shadowColor = "#00f0ff";
   ctx.shadowBlur = 8;
 
   for (let star of stars) {
-    let k = 128.0 / star.z;
-    let x = star.x * k;
-    let y = star.y * k;
-    if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) continue;
-    let size = (1 - star.z / canvas.width) * 2;
+    const k = 128.0 / star.z;
+    const x = star.x * k;
+    const y = star.y * k;
+    if (x < 0 || x >= width || y < 0 || y >= height) continue;
+    const size = (1 - star.z / width) * 2;
     ctx.fillRect(x, y, size, size);
   }
 
@@ -75,12 +101,10 @@ function animate() {
   moveStars();
   requestAnimationFrame(animate);
 }
-animate();
 
 window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  skylineCanvas.width = window.innerWidth;
-  skylineCanvas.height = window.innerHeight;
+  resizeCanvas();
 });
+
+resizeCanvas();
+animate();

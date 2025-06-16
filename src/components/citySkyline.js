@@ -17,12 +17,13 @@ export function citySkyline(canvas) {
   let gradientShift = 0;
 
   function drawSkyline() {
+    ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, width, height);
 
-    const gradient = ctx.createLinearGradient(0, 0, width, skylineHeight);
-    gradient.addColorStop(0, "#00f0ff44");
-    gradient.addColorStop(0.5 + 0.2 * Math.sin(gradientShift), "#ff00ff22");
-    gradient.addColorStop(1, "#00ff8855");
+    const gradient = ctx.createLinearGradient(0, 0, 0, skylineHeight);
+    gradient.addColorStop(0, "#030b15");
+    gradient.addColorStop(0.5, "#12002e");
+    gradient.addColorStop(1, "#000010");
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, skylineHeight);
