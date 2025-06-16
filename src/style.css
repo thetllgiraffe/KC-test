@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@300&display=swap");
 
-body,
+/* body,
 html {
   margin: 0;
   padding: 0;
@@ -9,25 +9,41 @@ html {
   color: white;
   background: black;
   height: 100vh;
-}
+} */
 
-#starfield {
-  position: absolute;
+canvas {
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 0;
 }
 
+#starfield {
+  z-index: 1;
+}
+
+#skyline {
+  z-index: 2;
+  pointer-events: none;
+}
+
 .hero {
   position: relative;
-  z-index: 1;
-  height: 100vh;
+  z-index: 2;
+  top: 30vh;
+  text-align: center;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 2rem;
+  gap: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hero h1 {
@@ -66,12 +82,6 @@ html {
     0 0 20px #00c0ff, 0 0 30px #00a0ff, 0 0 40px #0080ff;
 
   animation: flicker 4.5s infinite;
-}
-
-.actions {
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
 }
 
 .neon-btn,

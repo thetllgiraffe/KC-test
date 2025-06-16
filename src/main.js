@@ -1,6 +1,8 @@
 import "./style.css";
+import { citySkyline } from "./components/citySkyline.js";
 
 document.querySelector("#app").innerHTML = `
+  <canvas id="skyline"></canvas>
   <canvas id="starfield"></canvas>
   <div class="hero">
     <h1>KardChips</h1>
@@ -11,6 +13,11 @@ document.querySelector("#app").innerHTML = `
     </div>
   </div>
 `;
+
+const skylineCanvas = document.getElementById("skyline");
+skylineCanvas.width = window.innerWidth;
+skylineCanvas.height = window.innerHeight;
+citySkyline(skylineCanvas);
 
 const canvas = document.getElementById("starfield");
 const ctx = canvas.getContext("2d");
@@ -27,19 +34,29 @@ for (let i = 0; i < 250; i++) {
 }
 
 function drawStars() {
-  ctx.fillStyle = "black";
+  const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  bgGradient.addColorStop(0, "rgba(0, 240, 255, 0.05)");
+  bgGradient.addColorStop(0.45, "rgba(0, 0, 0, 1)");
+  bgGradient.addColorStop(0.55, "rgba(0, 0, 0, 1)");
+  bgGradient.addColorStop(1, "rgba(0, 240, 255, 0.03)");
+
+  ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx.fillStyle = "#00f0ff";
   ctx.shadowColor = "#00f0ff";
   ctx.shadowBlur = 8;
+
   for (let star of stars) {
     let k = 128.0 / star.z;
-    let x = star.x * k + canvas.width / 2;
-    let y = star.y * k + canvas.height / 2;
+    let x = star.x * k;
+    let y = star.y * k;
     if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) continue;
     let size = (1 - star.z / canvas.width) * 2;
     ctx.fillRect(x, y, size, size);
   }
+
+  ctx.shadowBlur = 0;
 }
 
 function moveStars() {
@@ -63,4 +80,7 @@ animate();
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  skylineCanvas.width = window.innerWidth;
+  skylineCanvas.height = window.innerHeight;
 });
