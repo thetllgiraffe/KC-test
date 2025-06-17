@@ -4,8 +4,11 @@ import green from "/chips/green.png";
 import yellow from "/chips/yellow.png";
 import brown from "/chips/brown.png";
 import gray from "/chips/gray.png";
+import pink from "/chips/pink.png";
+import custom from "/chips/custom.png";
+import "../../style.css";
 
-const chipImages = [purple, green, yellow, brown, gray];
+const chipImages = [purple, green, yellow, brown, gray, pink, custom];
 
 export function renderChipFall() {
   const canvas = document.createElement("canvas");
