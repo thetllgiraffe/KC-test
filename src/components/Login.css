@@ -1,4 +1,14 @@
-.login-container {
+.robot-bg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70vh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.login-card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,10 +26,26 @@
 }
 
 .login-container h2 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #00f0ff;
   margin-bottom: 1.5rem;
   letter-spacing: 0.1em;
+
+  font-family: "Orbitron", sans-serif;
+  font-weight: 300;
+
+  background: linear-gradient(90deg, #00f0ff, #ffffff, #00f0ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 0.2em;
+
+  text-shadow: 0 0 1px #000, 0 0 3px #0ff, 0 0 6px #0ff, 0 0 12px #00f0ff,
+    0 0 24px #00e0ff, 0 0 36px #00c0ff, 0 0 48px #00a0ff, 0 0 60px #0080ff,
+    0 0 80px #0050ff, 0 0 100px #0020ff;
 }
 
 .login-form {
