@@ -1,5 +1,5 @@
 import "../style.css";
-import { CitySkyline } from "./CitySkyline.js";
+import { CitySkyline } from "./backgrounds/CitySkyline.js";
 
 export function renderLanding() {
   document.querySelector("#app").innerHTML = `

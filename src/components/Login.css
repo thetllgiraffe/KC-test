@@ -8,6 +8,13 @@
   opacity: 0.9;
 }
 
+.tech-bg {
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
 .login-card {
   position: absolute;
   top: 50%;
@@ -46,6 +53,32 @@
   text-shadow: 0 0 1px #000, 0 0 3px #0ff, 0 0 6px #0ff, 0 0 12px #00f0ff,
     0 0 24px #00e0ff, 0 0 36px #00c0ff, 0 0 48px #00a0ff, 0 0 60px #0080ff,
     0 0 80px #0050ff, 0 0 100px #0020ff;
+
+  animation: flickerText 5s infinite;
+}
+
+@keyframes flickerText {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.85;
+  }
+  80%,
+  90% {
+    opacity: 0.7;
+  }
 }
 
 .login-form {
