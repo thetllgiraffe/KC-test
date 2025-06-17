@@ -6,12 +6,16 @@ import brown from "/chips/brown.png";
 import gray from "/chips/gray.png";
 import pink from "/chips/pink.png";
 import custom from "/chips/custom.png";
-import "../../style.css";
 
 const chipImages = [purple, green, yellow, brown, gray, pink, custom];
 
+let engine,
+  runner,
+  canvas,
+  chips = [];
+
 export function renderChipFall() {
-  const canvas = document.createElement("canvas");
+  canvas = document.createElement("canvas");
   canvas.className = "chip-canvas";
   document.body.appendChild(canvas);
   const ctx = canvas.getContext("2d");
@@ -22,43 +26,35 @@ export function renderChipFall() {
   const Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies,
-    Runner = Matter.Runner,
-    Body = Matter.Body;
+    Runner = Matter.Runner;
 
-  const engine = Engine.create();
-  const runner = Runner.create();
+  engine = Engine.create();
+  runner = Runner.create();
   const world = engine.world;
-  world.gravity.y = 0.9;
-
-  const chips = [];
-  const coveredColumns = new Set();
-  const chipSize = 300;
+  world.gravity.y = 1.2;
 
   const ground = Bodies.rectangle(
     canvas.width / 2,
-    canvas.height * 0.75 + 50,
+    canvas.height * 0.75 + 60,
     canvas.width,
-    100,
+    120,
     { isStatic: true }
   );
-
-  World.add(world, [ground]);
+  World.add(world, ground);
 
   function createChip() {
+    const size = 300;
     const x = Math.random() * canvas.width;
     const img = new Image();
     img.src = chipImages[Math.floor(Math.random() * chipImages.length)];
 
-    const restitution = 0.4 + Math.random() * 0.4;
-
-    const body = Bodies.circle(x, -100, chipSize / 2, {
-      restitution,
-      friction: 0.2,
-      render: { visible: false },
+    const body = Bodies.circle(x, -100, size / 2, {
+      restitution: Math.random() * 0.6 + 0.2,
+      friction: 0.5,
     });
 
     body.img = img;
-    body.size = chipSize;
+    body.size = size;
     body.trail = [];
     chips.push(body);
     World.add(world, body);
@@ -66,21 +62,21 @@ export function renderChipFall() {
 
   function renderChips() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (let chip of chips) {
       chip.trail.push({ x: chip.position.x, y: chip.position.y, alpha: 1 });
       if (chip.trail.length > 10) chip.trail.shift();
 
       for (let t of chip.trail) {
         ctx.beginPath();
-        ctx.arc(t.x, t.y, 5, 0, 2 * Math.PI);
+        ctx.arc(t.x, t.y, 8, 0, 2 * Math.PI);
         ctx.fillStyle = `rgba(0, 240, 255, ${t.alpha})`;
         ctx.fill();
         t.alpha *= 0.8;
       }
 
+      const { x, y } = chip.position;
       ctx.save();
-      ctx.translate(chip.position.x, chip.position.y);
+      ctx.translate(x, y);
       ctx.rotate(chip.angle);
       ctx.drawImage(
         chip.img,
@@ -90,40 +86,35 @@ export function renderChipFall() {
         chip.size
       );
       ctx.restore();
-
-      const col = Math.floor(chip.position.x / 50);
-      if (chip.position.y >= canvas.height * 0.75 - 10) {
-        coveredColumns.add(col);
-      }
-    }
-
-    if (coveredColumns.size >= canvas.width / 50) {
-      chips.length = 0;
-      coveredColumns.clear();
-      World.clear(world, false);
-      World.add(world, ground);
     }
   }
 
   function loop() {
-    Engine.update(engine, 1000 / 60);
+    Matter.Engine.update(engine, 1000 / 60);
     renderChips();
     requestAnimationFrame(loop);
   }
 
-  Runner.run(runner, engine);
+  Matter.Runner.run(runner, engine);
   loop();
 
-  setInterval(() => {
-    createChip();
-  }, 500);
+  for (let i = 0; i < 12; i++) {
+    setTimeout(createChip, i * 250);
+  }
 
   const hero = document.querySelector(".hero h1");
   if (hero) {
     hero.addEventListener("mouseenter", () => {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 6; i++) {
         createChip();
       }
     });
   }
+}
+
+export function destroyChipFall() {
+  if (runner) Matter.Runner.stop(runner);
+  if (engine) Matter.World.clear(engine.world);
+  if (canvas && canvas.parentNode) canvas.remove();
+  chips = [];
 }

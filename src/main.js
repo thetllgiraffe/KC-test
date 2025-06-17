@@ -1,5 +1,5 @@
 import { renderLanding } from "./components/Landing.js";
-import { renderLogin } from "./components/Login.js";
+import { renderLogin } from "./components/login/Login.js";
 
 function route() {
   const hash = window.location.hash;

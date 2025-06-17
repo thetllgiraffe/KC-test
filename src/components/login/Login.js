@@ -1,8 +1,8 @@
-import "../style.css";
+import "../../style.css";
 import "./login.css";
 import robo from "/neural_robot.png";
 import techgrid4 from "/tech_grid4.png";
-import { flickerSwitch } from "./backgrounds/GridFlicker.js";
+import { flickerSwitch } from "../backgrounds/GridFlicker.js";
 
 export function renderLogin() {
   document.querySelector("#app").innerHTML = `

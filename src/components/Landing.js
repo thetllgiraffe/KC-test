@@ -1,11 +1,10 @@
 import "../style.css";
 import { CitySkyline } from "./backgrounds/CitySkyline.js";
-import { renderChipFall } from "./backgrounds/ChipsAnimate.js";
+import { renderChipFall, destroyChipFall } from "./backgrounds/ChipsAnimate.js";
 
 export function renderLanding() {
   document.querySelector("#app").innerHTML = `
     <canvas id="skyline"></canvas>
-    <div id="chip-container"></div>
     <div class="hero">
       <h1>KardChips</h1>
       <p>Play Bold. Win Big. Infinite Reach.</p>
@@ -16,6 +15,8 @@ export function renderLanding() {
     </div>
   `;
 
+  renderChipFall();
+
   const skylineCanvas = document.getElementById("skyline");
 
   function resizeSkyline() {
@@ -24,21 +25,17 @@ export function renderLanding() {
 
     skylineCanvas.width = width;
     skylineCanvas.height = height;
-    skylineCanvas.style.width = `${width}px`;
-    skylineCanvas.style.height = `${height}px`;
-
     CitySkyline(skylineCanvas);
   }
 
   window.addEventListener("resize", resizeSkyline);
-
   resizeSkyline();
-  renderChipFall();
 
   setTimeout(() => {
     const btn = document.getElementById("signin-btn");
     if (btn) {
       btn.addEventListener("click", () => {
+        destroyChipFall();
         window.location.hash = "#login";
       });
     }
