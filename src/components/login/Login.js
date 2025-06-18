@@ -3,6 +3,7 @@ import "./login.css";
 import robo from "/neural_robot.png";
 import techgrid4 from "/tech_grid4.png";
 import { flickerSwitch } from "../backgrounds/GridFlicker.js";
+import { renderCreateAccount } from "../createAccount/CreateAccount.js";
 
 export function renderLogin() {
   document.querySelector("#app").innerHTML = `
@@ -17,7 +18,7 @@ export function renderLogin() {
           <button type="submit" class="neon-btn">Sign In</button>
         </form>
         <p class="signup-prompt">Don't have an account?</p>
-        <button id="create-account" class="neon-outline-btn create-account-btn">Create Account</button>
+        <button id="create-account" class="neon-outline-btn create-account-btn">Join the Circuit</button>
       </div>
     </div>
   `;
@@ -25,6 +26,7 @@ export function renderLogin() {
   flickerSwitch();
 
   document.getElementById("create-account").addEventListener("click", () => {
-    alert("Redirecting to account creation (placeholder)");
+    window.location.hash = "#createaccount";
+    renderCreateAccount();
   });
 }
