@@ -4,6 +4,7 @@ import robo from "/neural_robot.png";
 import techgrid4 from "/tech_grid4.png";
 import { flickerSwitch } from "../backgrounds/GridFlicker.js";
 import { renderCreateAccount } from "../createAccount/CreateAccount.js";
+import { GoogleSignIn } from "../GoogleSignin.js";
 
 export function renderLogin() {
   document.querySelector("#app").innerHTML = `
@@ -17,6 +18,7 @@ export function renderLogin() {
           <input type="password" placeholder="Password" required />
           <button type="submit" class="neon-btn">Sign In</button>
         </form>
+         ${GoogleSignIn()}
         <p class="signup-prompt">Don't have an account?</p>
         <button id="create-account" class="neon-outline-btn create-account-btn">Join the Circuit</button>
       </div>
