@@ -10,7 +10,7 @@ export function renderLanding() {
       <p>Play Bold. Win Big. Infinite Reach.</p>
       <div class="actions">
         <button class="neon-outline-btn" id="signin-btn">Sign In</button>
-        <button class="neon-outline-btn">Explore Chips</button>
+        <button class="neon-outline-btn" id="explore-chips-btn">Explore Chips</button>
       </div>
     </div>
   `;
@@ -32,11 +32,20 @@ export function renderLanding() {
   resizeSkyline();
 
   setTimeout(() => {
-    const btn = document.getElementById("signin-btn");
-    if (btn) {
-      btn.addEventListener("click", () => {
+    const signinBtn = document.getElementById("signin-btn");
+    if (signinBtn) {
+      signinBtn.addEventListener("click", () => {
         destroyChipFall();
         window.location.hash = "#login";
+      });
+    }
+
+    const exploreBtn = document.getElementById("explore-chips-btn");
+    if (exploreBtn) {
+      exploreBtn.addEventListener("click", () => {
+        destroyChipFall();
+        window.location.hash = "#chipdisplay";
+        handleRouting();
       });
     }
   }, 0);
