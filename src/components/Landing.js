@@ -9,8 +9,8 @@ export function renderLanding() {
       <h1>KardChips</h1>
       <p>Play Bold. Win Big. Infinite Reach.</p>
       <div class="actions">
-        <button class="neon-btn" id="signin-btn">Sign In</button>
-        <button class="neon-outline-btn">Explore Games</button>
+        <button class="neon-outline-btn" id="signin-btn">Sign In</button>
+        <button class="neon-outline-btn">Explore Chips</button>
       </div>
     </div>
   `;

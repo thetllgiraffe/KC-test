@@ -1,5 +1,5 @@
 import "../../style.css";
-import "./login.css";
+import "./Login.css";
 import robo from "/neural_robot.png";
 import techgrid4 from "/tech_grid4.png";
 import { flickerSwitch } from "../backgrounds/GridFlicker.js";
@@ -16,9 +16,9 @@ export function renderLogin() {
         <form class="login-form">
           <input type="text" placeholder="Username or Email" required />
           <input type="password" placeholder="Password" required />
-          <button type="submit" class="neon-btn">Sign In</button>
+          <button type="submit" class="neon-outline-btn">Sign In</button>
         </form>
-         ${GoogleSignIn()}
+        ${GoogleSignIn()}
         <p class="signup-prompt">Don't have an account?</p>
         <button id="create-account" class="neon-outline-btn create-account-btn">Join the Circuit</button>
       </div>

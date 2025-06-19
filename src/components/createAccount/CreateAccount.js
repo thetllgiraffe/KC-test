@@ -1,5 +1,5 @@
 import "../../style.css";
-import "./createAccount.css";
+import "./CreateAccount.css";
 
 export function renderCreateAccount() {
   document.querySelector("#app").innerHTML = `
