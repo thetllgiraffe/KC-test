@@ -1,5 +1,6 @@
 import { renderLanding } from "./components/Landing.js";
 import { renderLogin } from "./components/login/Login.js";
+import { renderChipDisplay } from "./components/chipDisplay/ChipDisplay.js";
 
 function handleRouting() {
   const hash = window.location.hash;
@@ -8,6 +9,8 @@ function handleRouting() {
     renderLogin();
   } else if (hash === "#createaccount") {
     renderCreateAccount();
+  } else if (hash === "#chipdisplay") {
+    renderChipDisplay();
   } else {
     renderLanding();
   }

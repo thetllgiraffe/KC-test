@@ -1,12 +1,6 @@
 export function GoogleSignIn() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-  window.handleCredentialResponse = function (response) {
-    const jwt = response.credential;
-    const userData = parseJwt(jwt);
-    console.log("Google User:", userData);
-  };
-
   function parseJwt(token) {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -19,15 +13,12 @@ export function GoogleSignIn() {
     return JSON.parse(jsonPayload);
   }
 
-  google.accounts.id.initialize({
-    client_id: clientId,
-    callback: handleCredentialResponse,
-  });
-  google.accounts.id.renderButton(document.getElementById("google-signin"), {
-    theme: "filled_black",
-    size: "large",
-    shape: "pill",
-  });
+  window.handleCredentialResponse = function (response) {
+    const jwt = response.credential;
+    const userData = parseJwt(jwt);
+    console.log("Google User:", userData);
+    window.location.hash = "#chipdisplay";
+  };
 
   if (!document.getElementById("google-identity")) {
     const script = document.createElement("script");
@@ -39,20 +30,22 @@ export function GoogleSignIn() {
   }
 
   setTimeout(() => {
-    window.google?.accounts.id.initialize({
-      client_id: clientId,
-      callback: window.handleCredentialResponse,
-    });
+    if (window.google?.accounts?.id) {
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+        callback: window.handleCredentialResponse,
+      });
 
-    window.google?.accounts.id.renderButton(
-      document.getElementById("google-signin"),
-      {
-        theme: "filled_black",
-        size: "large",
-        shape: "pill",
-        width: 320,
-      }
-    );
+      window.google.accounts.id.renderButton(
+        document.getElementById("google-signin"),
+        {
+          theme: "filled_black",
+          size: "large",
+          shape: "pill",
+          width: 320,
+        }
+      );
+    }
   }, 1000);
 
   return `<div id="google-signin" style="margin-top: 2rem;"></div>`;

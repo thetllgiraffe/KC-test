@@ -31,4 +31,8 @@ export function renderLogin() {
     window.location.hash = "#createaccount";
     renderCreateAccount();
   });
+
+  document
+    .querySelector(".login-card")
+    .insertAdjacentHTML("beforeend", GoogleSignIn());
 }
