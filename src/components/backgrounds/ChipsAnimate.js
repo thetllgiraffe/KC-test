@@ -113,8 +113,21 @@ export function renderChipFall() {
 }
 
 export function destroyChipFall() {
-  if (runner) Matter.Runner.stop(runner);
-  if (engine) Matter.World.clear(engine.world);
-  if (canvas && canvas.parentNode) canvas.remove();
-  chips = [];
+  if (runner) {
+    Matter.Runner.stop(runner);
+    runner = null;
+  }
+
+  if (engine) {
+    Matter.World.clear(engine.world, false);
+    Matter.Engine.clear(engine);
+    engine = null;
+  }
+
+  const canvas = document.querySelector(".chip-canvas");
+  if (canvas && canvas.parentNode) {
+    canvas.parentNode.removeChild(canvas);
+  }
+
+  chips.length = 0;
 }
