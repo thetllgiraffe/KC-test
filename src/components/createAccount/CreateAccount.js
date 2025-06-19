@@ -1,8 +1,10 @@
 import "../../style.css";
 import "./CreateAccount.css";
+import { renderHeader, setupHeaderEvents } from "../Header.js";
 
 export function renderCreateAccount() {
   document.querySelector("#app").innerHTML = `
+  ${renderHeader()}
     <div class="account-container">
       <div class="account-card">
         <h2>Create Your Account</h2>
@@ -28,4 +30,5 @@ export function renderCreateAccount() {
       </div>
     </div>
   `;
+  setupHeaderEvents();
 }

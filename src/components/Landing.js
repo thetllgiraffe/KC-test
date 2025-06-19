@@ -1,9 +1,11 @@
 import "../style.css";
 import { CitySkyline } from "./backgrounds/CitySkyline.js";
 import { renderChipFall, destroyChipFall } from "./backgrounds/ChipsAnimate.js";
+import { renderHeader, setupHeaderEvents } from "./Header.js";
 
 export function renderLanding() {
   document.querySelector("#app").innerHTML = `
+  ${renderHeader()}
     <canvas id="skyline"></canvas>
     <div class="hero">
       <h1>KardChips</h1>

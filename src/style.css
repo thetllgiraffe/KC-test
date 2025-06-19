@@ -11,6 +11,25 @@ html {
   height: 100vh;
 }
 
+#global-header {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+}
+
+#app-logo {
+  width: 68px;
+  height: 68px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 4px #00f0ff);
+  transition: transform 0.2s ease;
+}
+
+#app-logo:hover {
+  transform: scale(1.1);
+}
+
 canvas {
   position: absolute;
   top: 0;

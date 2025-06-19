@@ -6,6 +6,7 @@ import gray from "/chips/gray.png";
 import pink from "/chips/pink.png";
 import custom from "/chips/custom.png";
 import "./ChipDisplay.css";
+import { renderHeader, setupHeaderEvents } from "../Header.js";
 
 const chipImages = [purple, green, yellow, brown, gray, pink, custom];
 const chipData = [
@@ -64,6 +65,7 @@ const chipData = [
 export function renderChipDisplay() {
   const container = document.querySelector("#app");
   container.innerHTML = `
+  ${renderHeader()}
     <div class="chip-carousel-container">
       <div class="chip-orbit" id="chipOrbit"></div>
       <div class="chip-info-card" id="chipInfo"></div>
@@ -72,6 +74,8 @@ export function renderChipDisplay() {
          <div id="chipToast" class="chip-toast">Added to cart</div>
     </div>
   `;
+
+  setupHeaderEvents();
 
   const orbit = document.getElementById("chipOrbit");
   const info = document.getElementById("chipInfo");

@@ -5,9 +5,11 @@ import techgrid4 from "/tech_grid4.png";
 import { flickerSwitch } from "../backgrounds/GridFlicker.js";
 import { renderCreateAccount } from "../createAccount/CreateAccount.js";
 import { GoogleSignIn } from "../GoogleSignin.js";
+import { renderHeader, setupHeaderEvents } from "../Header.js";
 
 export function renderLogin() {
   document.querySelector("#app").innerHTML = `
+  ${renderHeader()}
     <div class="login-container">
       <img src="${techgrid4}" alt="tech grid" class="tech-bg" />
       <img src="${robo}" alt="neural robot" class="robot-bg" />
@@ -26,6 +28,7 @@ export function renderLogin() {
   `;
 
   flickerSwitch();
+  setupHeaderEvents();
 
   document.getElementById("create-account").addEventListener("click", () => {
     window.location.hash = "#createaccount";
