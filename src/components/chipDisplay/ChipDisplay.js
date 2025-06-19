@@ -67,11 +67,21 @@ export function renderChipDisplay() {
     <div class="chip-carousel-container">
       <div class="chip-orbit" id="chipOrbit"></div>
       <div class="chip-info-card" id="chipInfo"></div>
+        <button class="chip-btn resume-btn">Resume Browsing</button>
+        <button class="chip-btn cart-btn">Add to Cart</button>
+         <div id="chipToast" class="chip-toast">Added to cart</div>
     </div>
   `;
 
   const orbit = document.getElementById("chipOrbit");
   const info = document.getElementById("chipInfo");
+  const toast = document.getElementById("chipToast");
+  const resumeBtn = document.querySelector(".resume-btn");
+  const cartBtn = document.querySelector(".cart-btn");
+
+  let selectedIndex = null;
+  let isPaused = false;
+  info.style.display = "none";
 
   chipData.forEach((data, i) => {
     const chip = document.createElement("div");
@@ -85,6 +95,8 @@ export function renderChipDisplay() {
         .forEach((c) => c.classList.remove("focused"));
       chip.classList.add("focused");
 
+      selectedIndex = i;
+
       const anglePerChip = 360 / chipData.length;
       const rotateTo = anglePerChip * i;
 
@@ -92,16 +104,41 @@ export function renderChipDisplay() {
       orbitEl.style.animation = "none";
       orbitEl.style.transform = `rotateX(18deg) rotateY(-${rotateTo}deg)`;
 
+      info.style.display = "block";
       info.innerHTML = `
-    <h3>${data.label}</h3>
-    <p><strong>Material:</strong> ${data.material}</p>
-    <p><strong>Security:</strong> ${data.security}</p>
-    <p><strong>Use Case:</strong> ${data.use}</p>
-  `;
+  <h3>${data.label}</h3>
+  <p><strong>Material:</strong> ${data.material}</p>
+  <p><strong>Security:</strong> ${data.security}</p>
+  <p><strong>Use Case:</strong> ${data.use}</p>
+`;
     });
 
     orbit.appendChild(chip);
   });
+
+  resumeBtn.addEventListener("click", () => {
+    isPaused = false;
+    document
+      .querySelectorAll(".chip")
+      .forEach((c) => c.classList.remove("focused"));
+    orbit.style.animation = "orbitRotate 60s linear infinite";
+    info.style.display = "none";
+  });
+
+  cartBtn.addEventListener("click", () => {
+    if (selectedIndex !== null) {
+      const chip = chipData[selectedIndex];
+      showToast(`${chip.label} added to cart!`);
+    }
+  });
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.style.opacity = "1";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+    }, 2000);
+  }
 
   info.innerHTML = `
     <h3>${chipData[0].label}</h3>

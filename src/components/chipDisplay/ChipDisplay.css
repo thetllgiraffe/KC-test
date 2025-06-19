@@ -115,3 +115,52 @@
   line-height: 1.4;
   color: #d0faff;
 }
+
+.chip-btn {
+  position: absolute;
+  padding: 0.9rem 1.4rem;
+  font-size: 0.95rem;
+  font-family: "Orbitron", sans-serif;
+  color: #00f0ff;
+  background: transparent;
+  border: 1px solid #00f0ff80;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  text-shadow: 0 0 4px #00f0ff88;
+}
+
+.chip-btn:hover {
+  background: #00f0ff20;
+  box-shadow: 0 0 10px #00f0ff88;
+}
+
+.resume-btn {
+  bottom: 24px;
+  left: 24px;
+}
+
+.cart-btn {
+  bottom: 24px;
+  right: 24px;
+}
+
+.chip-toast {
+  position: absolute;
+  bottom: 90px;
+  right: 24px;
+  background: rgba(0, 240, 255, 0.1);
+  color: #00f0ff;
+  padding: 0.8rem 1.2rem;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.9rem;
+  border: 1px solid #00f0ff40;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+  text-shadow: 0 0 6px #00f0ff;
+}
