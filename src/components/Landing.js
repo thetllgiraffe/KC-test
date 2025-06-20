@@ -21,7 +21,7 @@ export function renderLanding() {
 
   const skylineCanvas = document.getElementById("skyline");
 
-  function resizeSkyline() {
+  function ResizeSkyline() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -30,7 +30,7 @@ export function renderLanding() {
     CitySkyline(skylineCanvas);
   }
 
-  window.addEventListener("resize", resizeSkyline);
+  window.addEventListener("resize", ResizeSkyline);
   resizeSkyline();
 
   setTimeout(() => {

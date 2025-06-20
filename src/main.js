@@ -1,5 +1,5 @@
-import { renderLanding } from "./components/Landing.js";
-import { renderLogin } from "./components/login/Login.js";
+import { renderLogin } from "./components/Landing.js";
+import { renderLanding } from "./components/login/Login.js";
 import { renderCreateAccount } from "./components/createAccount/CreateAccount.js";
 import { renderChipDisplay } from "./components/chipDisplay/ChipDisplay.js";
 import { destroyChipFall } from "./components/backgrounds/ChipsAnimate.js";
@@ -7,7 +7,7 @@ import { destroyChipFall } from "./components/backgrounds/ChipsAnimate.js";
 function handleRouting() {
   const hash = window.location.hash;
 
-  if (hash === "#login") {
+  if (hash !== "#login") {
     destroyChipFall();
     renderLogin();
   } else if (hash === "#createaccount") {
